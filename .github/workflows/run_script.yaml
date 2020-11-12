@@ -17,16 +17,13 @@ jobs:
       - uses: actions/checkout@v1
       - uses: r-lib/actions/setup-r@v1
       - uses: r-lib/actions/setup-pandoc@v1
-      - name: Install Python
+      - name: Install Python and instaloader
         run: |
           Rscript -e "install.packages('remotes')"
           Rscript -e "remotes::install_github('rstudio/reticulate')"
           Rscript -e "reticulate::install_miniconda()"
           Rscript -e "reticulate::conda_create('r-reticulate', packages = c('python==3.6.9'))"
-      - name: Install instaloader
-        run: |
-          Rscript -e "install.packages('remotes')"
-          Rscript -e "reticulate::py_install(c('instaloader'), pip = T, envname = envname)""
+          Rscript -e "reticulate::py_install(c('instaloader'), pip = T, envname = envname)"
       - name: Run R script
         run: Rscript script.R
       - name: Commit results

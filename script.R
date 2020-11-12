@@ -19,6 +19,9 @@ if(!file.exists("latest_hashtag.txt")){
   cat("stopptdenwahnsinn", file = "latest_hashtag.txt", append = T, sep = "\n")
 } 
 
+if(!dir.exists("data")){
+  dir.exists("data")
+}
 
 
 hashies <- c("plandemic", "plannedemic", 

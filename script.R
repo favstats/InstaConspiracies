@@ -4,8 +4,6 @@
 #   "socialdistancing", "grundgesetz", "woke", "facts", "impfpflicht", "who","covidiots","berlin","deutschland", "rockafeller", "maga", "trump", "freiheit","coronamemes", "virus", "vaccine", "pandemic", "hoax", "propaganda", "repost","humanrights", "grundrechte", "freedom","coronavirus", "covid19", "covid_19", "covid","corona", "truth", "vaccines", "lockdown", "5g", "maskenpflicht", "trump2020",  "wakeup")
 
 
-# install.packages("pacman")
-# library(instaloadeR)
 library(reticulate)
 
 reticulate::use_python(py_config()$python)
@@ -25,6 +23,14 @@ if(!file.exists("latest_hashtag.txt")){
 
 if(!dir.exists("data")){
   dir.exists("data")
+}
+
+with_timeout <- function(expr, cpu, elapsed){
+  expr <- substitute(expr)
+  envir <- parent.frame()
+  setTimeLimit(cpu = cpu, elapsed = elapsed, transient = TRUE)
+  on.exit(setTimeLimit(cpu = Inf, elapsed = Inf, transient = FALSE))
+  eval(expr, envir = envir)
 }
 
 
@@ -77,9 +83,6 @@ hashies <- c("plandemic", "plannedemic",
 )
 
 latest_hashtag <- readLines("latest_hashtag.txt")[1]
-  
-
-
 
 if(latest_hashtag == hashies[length(hashies)]){
   hashies <- "plandemic"
@@ -98,11 +101,14 @@ cat(hashies, file = "latest_hashtag.txt")
   
 output <- tryCatch(
   {
-    insta_posts(query = hashies, 
-                scope = "hashtag",
-                max_posts = 1000000, 
-                scrape_comments = F,
-                save_path = paste0("data/", hashies, ".csv"))
+    
+    with_timeout(insta_posts(query = hashies, 
+                             scope = "hashtag",
+                             max_posts = 1000000, 
+                             scrape_comments = F,
+                             save_path = paste0("data/", hashies, ".csv")),
+                 60*60*5.5, 
+                 60*60*5.5)
     
   },
   error=function(cond) {

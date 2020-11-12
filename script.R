@@ -97,12 +97,12 @@ get_em <- function(hashtag) {
                            save_path = glue::glue("data/{hashtag}.csv"))
 }
 
-get_em <- possibly(get_em, otherwise = NA, quiet = F)
-
-hashies %>%
-  purrr::walk(get_em)
+# get_em <- possibly(get_em, otherwise = NA, quiet = F)
 
 
 cat(hashies, file = "latest_hashtag.txt", append = T, sep = "\n")
+
+hashies %>%
+  purrr::walk(get_em)
 
 

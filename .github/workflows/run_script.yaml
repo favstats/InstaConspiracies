@@ -14,7 +14,7 @@ jobs:
       PIP_NO_WARN_SCRIPT_LOCATION: false
       RETICULATE_AUTOCONFIGURE: 'FALSE'
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v1
       - uses: r-lib/actions/setup-r@v1
       - uses: r-lib/actions/setup-pandoc@v1
       - name: Install Python

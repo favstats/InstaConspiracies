@@ -33,7 +33,6 @@ with_timeout <- function(expr, cpu, elapsed){
   eval(expr, envir = envir)
 }
 
-
 hashies <- c("plandemic", "plannedemic", 
              "stop5grollout", "stop5g", "stop5gflorida", "stop5gglobal", "freedomkeepers", 
              "stop5gaustralia", "stop5guk", "stop5gitalia", "stop5gcalifornia", 

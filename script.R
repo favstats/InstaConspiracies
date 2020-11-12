@@ -99,23 +99,23 @@ cat(hashies, file = "latest_hashtag.txt")
 
 # get_em <- function(hashtag) {
   
-output <- tryCatch(
-  {
-    
-    with_timeout(insta_posts(query = hashies, 
-                             scope = "hashtag",
-                             max_posts = 1, 
-                             scrape_comments = F,
-                             save_path = paste0("data/", hashies, ".csv")),
-                 60*60*5.5, 
-                 60*60*5.5)
-    
-  },
-  error=function(cond) {
-    message("Here's the original error message:")
-    message(cond)
-    # Choose a return value in case of error
-    return(NA)
-  }
-)    
+# output <- tryCatch(
+#   {
+#     
+#     with_timeout(insta_posts(query = hashies, 
+#                              scope = "hashtag",
+#                              max_posts = 1000000, 
+#                              scrape_comments = F,
+#                              save_path = paste0("data/", hashies, ".csv")),
+#                  60*60*5.5, 
+#                  60*60*5.5)
+#     
+#   },
+#   error=function(cond) {
+#     message("Here's the original error message:")
+#     message(cond)
+#     # Choose a return value in case of error
+#     return(NA)
+#   }
+# )    
 

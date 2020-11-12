@@ -30,5 +30,6 @@ jobs:
         run: |
           git config --global user.email "fabio.votta@gmail.com"
           git config --global user.name "favstats"
+          git add -A
           git commit --allow-empty -m 'gHA build: ${{github.run_number}}' || echo "No changes to commit"
           git push https://${{github.actor}}:${{secrets.token}}@github.com/${{github.repository}}.git HEAD:${{ github.ref }} || echo "No changes to commit"

@@ -79,8 +79,9 @@ hashies <- c("plandemic", "plannedemic",
              "coronavirushoax", "coronafraude", "londonrealarmy", "stopptdenwahnsinn"
 )
 
-latest_hashtag <- read_lines("latest_hashtag.txt") %>% 
-  .[length(.)]
+latest_hashtag <- read_lines("latest_hashtag.txt") 
+  
+latest_hashtag <- latest_hashtag[length(latest_hashtag)]
 
 
 
@@ -95,14 +96,14 @@ if(latest_hashtag == "stopptdenwahnsinn"){
 
 print(paste0("Getting #", hashies))
 
-get_em <- function(hashtag) {
+# get_em <- function(hashtag) {
   
-  instaloadeR::insta_posts(query = hashtag, 
+  instaloadeR::insta_posts(query = hashies, 
                            scope = "hashtag",
                            max_posts = 1000000, 
                            scrape_comments = F,
                            save_path = glue::glue("data/{hashtag}.csv"))
-}
+# }
 
 # get_em <- possibly(get_em, otherwise = NA, quiet = F)
 
@@ -112,6 +113,6 @@ cat(hashies, file = "latest_hashtag.txt", append = T, sep = "\n")
 # hashies %>%
 #   purrr::walk(get_em)
 
-get_em(hashies)
+# get_em(hashies)
 
 

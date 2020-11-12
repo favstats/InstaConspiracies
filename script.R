@@ -16,10 +16,7 @@ message("instaloader initialized")
 
 insta_posts <- function(query, scope, max_posts, scrape_comments, save_path = "", since = "", until = "") {
   
-  py$insta_posts_py(query, scope, max_posts, scrape_comments, save_path, since, until) %>%
-    purrr::flatten() %>%
-    dplyr::bind_rows() %>%
-    unique()
+  py$insta_posts_py(query, scope, max_posts, scrape_comments, save_path, since, until) 
 }
 
 if(!file.exists("latest_hashtag.txt")){
@@ -96,19 +93,21 @@ if(latest_hashtag == hashies[length(hashies)]){
 
 print(paste0("Getting #", hashies))
 
+cat(hashies, file = "latest_hashtag.txt", append = T, sep = "\n")
+
 # get_em <- function(hashtag) {
   
-  instaloadeR::insta_posts(query = hashies, 
-                           scope = "hashtag",
-                           max_posts = 1000000, 
-                           scrape_comments = F,
-                           save_path = glue::glue("data/{hashtag}.csv"))
+output <- insta_posts(query = hashies, 
+              scope = "hashtag",
+              max_posts = 1000000, 
+              scrape_comments = F,
+              save_path = glue::glue("data/{hashies}.csv"))
 # }
 
 # get_em <- possibly(get_em, otherwise = NA, quiet = F)
 
 
-cat(hashies, file = "latest_hashtag.txt", append = T, sep = "\n")
+
 
 # hashies %>%
 #   purrr::walk(get_em)

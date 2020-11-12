@@ -101,7 +101,7 @@ output <- insta_posts(query = hashies,
               scope = "hashtag",
               max_posts = 1000000, 
               scrape_comments = F,
-              save_path = glue::glue("data/{hashies}.csv"))
+              save_path = paste0("data/", hashies, ".csv"))
 # }
 
 # get_em <- possibly(get_em, otherwise = NA, quiet = F)

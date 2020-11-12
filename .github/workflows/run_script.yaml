@@ -23,7 +23,7 @@ jobs:
           Rscript -e "remotes::install_github('rstudio/reticulate')"
           Rscript -e "reticulate::install_miniconda()"
           Rscript -e "reticulate::conda_create('r-reticulate', packages = c('python==3.6.9'))"
-          Rscript -e "reticulate::py_install(c('instaloader'), pip = T, envname = envname)"
+          Rscript -e "reticulate::py_install(c('instaloader'), pip = T, envname = NULL)"
       - name: Run R script
         run: Rscript script.R
       - name: Commit results

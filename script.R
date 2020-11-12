@@ -1,4 +1,9 @@
 
+# c("donaldtrump",  "tyranny",  "usa", "pray","conspiracy", "widerstand", "lies", "fearmongering", 
+#   "love","health", "2020", "blm", "government",  "demonstration", "govenmentcorruption", "cdc","pandemie","masks",  "conspiracytheory", 
+#   "socialdistancing", "grundgesetz", "woke", "facts", "impfpflicht", "who","covidiots","berlin","deutschland", "rockafeller", "maga", "trump", "freiheit","coronamemes", "virus", "vaccine", "pandemic", "hoax", "propaganda", "repost","humanrights", "grundrechte", "freedom","coronavirus", "covid19", "covid_19", "covid","corona", "truth", "vaccines", "lockdown", "5g", "maskenpflicht", "trump2020",  "wakeup")
+
+
 # install.packages("pacman")
 library(instaloadeR)
 library(reticulate)
@@ -10,7 +15,75 @@ reticulate::use_python(py_config()$python)
 
 init_instaloadeR()
 
-hashies <- c("plannedemic")
+if(!file.exists("latest_hashtag.txt")){
+  cat("stopptdenwahnsinn", file = "latest_hashtag.txt", append = T, sep = "\n")
+} 
+
+
+
+hashies <- c("plandemic", "plannedemic", 
+             "stop5grollout", "stop5g", "stop5gflorida", "stop5gglobal", "freedomkeepers", 
+             "stop5gaustralia", "stop5guk", "stop5gitalia", "stop5gcalifornia", 
+             "stop5ginternational", "stop5gtowers", "stop5gespaña", "stop5gbarcelona", 
+             "stop5gusa", "stop5gcentralcoast", "stop5gpennsylvania", "stop5gtoday", 
+             "stop5ghawaii", "stop5gitaly", "stop5gworldwide", "stop5geverywhere", 
+             "governmentlies", "fuckbillgates", "informedconsent", "billgatesisevil", 
+             "scamdemic", "vaccineinjury", "arrestbillgates", "markofthebeast", 
+             "parentalrights", "fearmongering", "firefauci", "readtheinsert", 
+             "savethechildren", "saveourchildren", "projectbluebeam", "mindcontrol", 
+             "cabal", "event201", "id2020", "healthfreedom", "plandemic2020", 
+             "coronalies", "medicalrights", "saynotobillgates", "wakeupsheeple", 
+             "reopenusa", "populationcontrol", "idonotconsent", "believemothers", 
+             "coronafake", "givegatesnochance", "medicalfreedomofchoice", 
+             "gibgateskeinechance", "widerstand2020", "protruth", "fucknwo", 
+             "fakevirus", "attilahildmann", "medicalexemption", "coronalüge", 
+             "bodoschiffmann", "vaccinationchoice", "stopbillgates", "davidicke", 
+             "wedonotconsent", "betweenmeandmydoctor", "truther", "outofshadows", 
+             "hollyweirdisevil", "hisnamewassethrich", "andrenochrome", "georgesoros", 
+             "wherewegoonewegoall", "wearethenewsnow", "filmyourhospital", 
+             "qanonarmy", "qarmy", "thestormisuponus", "darktolight", "weareq", 
+             "pizzagate", "nonewnormal", "rfidchip", "newworldorder", "agenda21", 
+             "billgates", "nwo", "fakenews", "illuminati", "quarantine", "covid1984", 
+             "deepstate", "depopulation", "mkultra", "agenda2030", "thegreatawakening", 
+             "chemtrails", "qanon", "pedogate", "epsteindidntkillhimself", 
+             "newworldorderagenda", "sheeple", "wwg1wga", "nasalies", "greatawakening", 
+             "endtimes", "rothschild", "truthseeker", "falseflag", "bilderberggroup", 
+             "querdenken", "zionistagenda", "plandemie", "fallofthecabal", 
+             "devilworshippers", "theyarekillingus", "thegoyimknow", "falseflagoperations", 
+             "satanicgovernments", "querdenken711", "querdenker", "fakepandemie", 
+             "depopulationagenda", "adrenochrome", "redpill", "maskenzwang", 
+             "obamagate", "plandemia", "covidhoax", "impfzwang", "nomask", 
+             "noalnuevoordenmundial", "kenfm", "endthelockdown", "q", "antivax", 
+             "medialies", "zwangsimpfung", "5gdangers", "reopenamerica", "scamdemic2020", 
+             "nomaskneeded", "saynoto5gworldwide", "saynotomandatoryvaccinations", 
+             "saynotomasks", "covidlies", "haarp", "covid19fake", "virusesarenotcontagious", 
+             "elonmusk5gsatellites", "fuckmasks", "oneworldgovernment", "psychologicalwarfare", 
+             "billgatesisamurderer", "billgatesrfid", "agenda21depopulationplan", 
+             "covidgate", "no5g", "billgatescoronavirus", "60ghz", "wwg1wgaworldwide", 
+             "thebaqery", "billgatesvaccine", "wuhanvirus", "thevirusscareisfake", 
+             "antivaxx", "medicalfreedomactivist", "hugsovermasks", "falldemie", 
+             "911insidejob", "endthelockdownnow", "stopwho", "globalhealthsecurityagenda", 
+             "pedovore", "prisonplanet", "redpilled", "coronavirusisfake", 
+             "antivaccine", "plamdemic", "secretsocieties", "losvirusnoexisten", 
+             "killilluminati", "fakepandemic", "covid19hoax", "pedowood", 
+             "coronavirushoax", "coronafraude", "londonrealarmy", "stopptdenwahnsinn"
+)
+
+latest_hashtag <- read_lines("latest_hashtag.txt") %>% 
+  .[length(.)]
+
+# latest_hashtag <- "londonrealarmy"
+
+if(latest_hashtag == "stopptdenwahnsinn"){
+  hashies <- "plandemic"
+  
+} else {
+  hashies <- hashies[which(hashies==latest_hashtag)+1] 
+}
+
+
+
+print(paste0("Getting #", hashies))
 
 get_em <- function(hashtag) {
   
@@ -26,5 +99,7 @@ get_em <- possibly(get_em, otherwise = NA, quiet = F)
 hashies %>%
   purrr::walk(get_em)
 
-# read_csv("data/plannedemic.csv")
+
+cat(hashies, file = "latest_hashtag.txt", append = T, sep = "\n")
+
 

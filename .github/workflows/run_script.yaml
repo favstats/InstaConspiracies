@@ -10,7 +10,6 @@ jobs:
     runs-on: macOS-latest
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-      TF_VERSION: '2.1.0'
       CRAN: 
       PIP_NO_WARN_SCRIPT_LOCATION: false
       RETICULATE_AUTOCONFIGURE: 'FALSE'

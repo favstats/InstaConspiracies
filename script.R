@@ -79,13 +79,13 @@ hashies <- c("plandemic", "plannedemic",
              "coronavirushoax", "coronafraude", "londonrealarmy", "stopptdenwahnsinn"
 )
 
-latest_hashtag <- read_lines("latest_hashtag.txt") 
+latest_hashtag <- readLines("latest_hashtag.txt") 
   
 latest_hashtag <- latest_hashtag[length(latest_hashtag)]
 
 
 
-if(latest_hashtag == "stopptdenwahnsinn"){
+if(latest_hashtag == hashies[length(hashies)]){
   hashies <- "plandemic"
   
 } else {

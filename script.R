@@ -76,9 +76,8 @@ hashies <- c("plandemic", "plannedemic",
              "coronavirushoax", "coronafraude", "londonrealarmy", "stopptdenwahnsinn"
 )
 
-latest_hashtag <- readLines("latest_hashtag.txt") 
+latest_hashtag <- readLines("latest_hashtag.txt")[1]
   
-latest_hashtag <- latest_hashtag[length(latest_hashtag)]
 
 
 
@@ -93,25 +92,24 @@ if(latest_hashtag == hashies[length(hashies)]){
 
 print(paste0("Getting #", hashies))
 
-cat(hashies, file = "latest_hashtag.txt", append = T, sep = "\n")
+cat(hashies, file = "latest_hashtag.txt")
 
 # get_em <- function(hashtag) {
   
-output <- insta_posts(query = hashies, 
-              scope = "hashtag",
-              max_posts = 1000000, 
-              scrape_comments = F,
-              save_path = paste0("data/", hashies, ".csv"))
-# }
-
-# get_em <- possibly(get_em, otherwise = NA, quiet = F)
-
-
-
-
-# hashies %>%
-#   purrr::walk(get_em)
-
-# get_em(hashies)
-
+output <- tryCatch(
+  {
+    insta_posts(query = hashies, 
+                scope = "hashtag",
+                max_posts = 1000000, 
+                scrape_comments = F,
+                save_path = paste0("data/", hashies, ".csv"))
+    
+  },
+  error=function(cond) {
+    message("Here's the original error message:")
+    message(cond)
+    # Choose a return value in case of error
+    return(NA)
+  }
+)    
 

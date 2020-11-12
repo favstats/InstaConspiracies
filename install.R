@@ -1,5 +1,5 @@
 
-install.packages(c("tidyverse", "devtools"))
+# install.packages(c("dplyr", "devtools", "purrr"))
 
 # devtools::install_github("rstudio/reticulate")
 

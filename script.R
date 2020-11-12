@@ -5,15 +5,22 @@
 
 
 # install.packages("pacman")
-library(instaloadeR)
+# library(instaloadeR)
 library(reticulate)
-library(purrr)
-library(tidyverse)
 
 reticulate::use_python(py_config()$python)
 
 
-init_instaloadeR()
+reticulate::source_python("https://raw.githubusercontent.com/favstats/instaloadeR/master/script.py")
+message("instaloader initialized")
+
+insta_posts <- function(query, scope, max_posts, scrape_comments, save_path = "", since = "", until = "") {
+  
+  py$insta_posts_py(query, scope, max_posts, scrape_comments, save_path, since, until) %>%
+    purrr::flatten() %>%
+    dplyr::bind_rows() %>%
+    unique()
+}
 
 if(!file.exists("latest_hashtag.txt")){
   cat("stopptdenwahnsinn", file = "latest_hashtag.txt", append = T, sep = "\n")
@@ -102,7 +109,9 @@ get_em <- function(hashtag) {
 
 cat(hashies, file = "latest_hashtag.txt", append = T, sep = "\n")
 
-hashies %>%
-  purrr::walk(get_em)
+# hashies %>%
+#   purrr::walk(get_em)
+
+get_em(hashies)
 
 

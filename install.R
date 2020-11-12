@@ -1,10 +1,10 @@
 
 install.packages(c("tidyverse", "devtools"))
 
-devtools::install_github("rstudio/reticulate")
+# devtools::install_github("rstudio/reticulate")
 
-devtools::install_github("favstats/instaloadeR")
+# devtools::install_github("favstats/instaloadeR")
 
-print("install instaloader")
+# print("install instaloader")
 
-instaloadeR::install_instaloadeR()
+# instaloadeR::install_instaloadeR()

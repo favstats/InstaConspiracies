@@ -104,7 +104,7 @@ output <- tryCatch(
     
     with_timeout(insta_posts(query = hashies, 
                              scope = "hashtag",
-                             max_posts = 1000000, 
+                             max_posts = 1, 
                              scrape_comments = F,
                              save_path = paste0("data/", hashies, ".csv")),
                  60*60*5.5, 

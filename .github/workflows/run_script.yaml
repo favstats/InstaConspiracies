@@ -24,8 +24,8 @@ jobs:
           Rscript -e "reticulate::install_miniconda()"
           Rscript -e "reticulate::conda_create('r-reticulate', packages = c('python==3.6.9'))"
           Rscript -e "reticulate::py_install(c('instaloader'), pip = T, envname = NULL)"
-      - name: Run R script
-        run: Rscript script.R
+      - name: Run Py script
+        run: python script.py
       - name: Commit results
         run: |
           git config --global user.email "fabio.votta@gmail.com"

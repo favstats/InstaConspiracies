@@ -14,16 +14,20 @@ jobs:
       PIP_NO_WARN_SCRIPT_LOCATION: false
       RETICULATE_AUTOCONFIGURE: 'FALSE'
     steps:
-      - uses: actions/checkout@v1
-      - uses: r-lib/actions/setup-r@v1
-      - uses: r-lib/actions/setup-pandoc@v1
-      - name: Install Python and instaloader
-        run: |
-          Rscript -e "install.packages('remotes')"
-          Rscript -e "remotes::install_github('rstudio/reticulate')"
-          Rscript -e "reticulate::install_miniconda()"
-          Rscript -e "reticulate::conda_create('r-reticulate', packages = c('python==3.6.9'))"
-          Rscript -e "reticulate::py_install(c('instaloader'), pip = T, envname = NULL)"
+      # - uses: actions/checkout@v1
+      # - uses: r-lib/actions/setup-r@v1
+      # - uses: r-lib/actions/setup-pandoc@v1
+      # - name: Install Python and instaloader
+      #   run: |
+      #     Rscript -e "install.packages('remotes')"
+      #     Rscript -e "remotes::install_github('rstudio/reticulate')"
+      #     Rscript -e "reticulate::install_miniconda()"
+      #     Rscript -e "reticulate::conda_create('r-reticulate', packages = c('python==3.6.9'))"
+      #     Rscript -e "reticulate::py_install(c('instaloader'), pip = T, envname = NULL)"
+      - uses: BSFishy/pip-action@v1
+        with:
+          packages: |
+            instaloader
       - name: Run Py script
         run: python script.py
       - name: Commit results

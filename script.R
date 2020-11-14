@@ -8,6 +8,8 @@ library(reticulate)
 
 reticulate::use_python(py_config()$python)
 
+# py_install("instaloader", pip = T, envname = NULL)
+
 
 reticulate::source_python("https://raw.githubusercontent.com/favstats/instaloadeR/master/script.py")
 message("instaloader initialized")

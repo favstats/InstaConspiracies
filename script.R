@@ -5,6 +5,7 @@
 
 
 library(reticulate)
+library(instaloadeR)
 
 reticulate::use_python(py_config()$python)
 

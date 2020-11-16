@@ -131,4 +131,19 @@ output <- tryCatch(
   }
 )
 
+flatten1 <- function(x) {
+  y <- list()
+  rapply(x, function(x) y <<- c(y,x))
+  y
+}
+
+Reduce(output)
+
+rbind(flatten1(output))
+
+f <- function(l) {
+  if (!is.list(l)) return(l)
+  do.call('rbind', lapply(l, function(x) `length<-`(x, max(lengths(l)))))
+}
+
 print(paste0("Dataset has so many rows: ", length(output)))

@@ -2,9 +2,11 @@ import instaloader
 from datetime import datetime
 import os.path
 from os import path
+import os
 from itertools import dropwhile, takewhile
 import re
 import csv
+
 
 
 instagram = instaloader.Instaloader(
@@ -218,6 +220,9 @@ def get_followers(username):
     follower_list.append(follower.username)
     
   return(follower_list)
+  
+  
+insta_login_py(os.getenv('INSTAGRAM_LOGIN'), os.getenv('INSTAGRAM_PW'))
 
 
-# insta_posts_py(query = "plannedemic", scope = "hashtag", max_posts = 10,  scrape_comments = False, save_path = "data/example.csv")
+insta_posts_py(query = "plannedemic", scope = "hashtag", max_posts = 10,  scrape_comments = False, save_path = "data/example.csv")

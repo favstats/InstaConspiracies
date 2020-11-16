@@ -9,13 +9,20 @@ library(reticulate)
 reticulate::use_python(py_config()$python)
 
 
-reticulate::source_python("https://raw.githubusercontent.com/favstats/instaloadeR/master/script.py")
-message("instaloader initialized")
+# reticulate::source_python("https://raw.githubusercontent.com/favstats/instaloadeR/master/script.py")
+# message("instaloader initialized")
+# 
+# insta_posts <- function(query, scope, max_posts, scrape_comments, save_path = "", since = "", until = "") {
+#   
+#   py$insta_posts_py(query, scope, max_posts, scrape_comments, save_path, since, until) 
+# }
 
-insta_posts <- function(query, scope, max_posts, scrape_comments, save_path = "", since = "", until = "") {
-  
-  py$insta_posts_py(query, scope, max_posts, scrape_comments, save_path, since, until) 
-}
+instaloadeR::init_instaloadeR()
+
+instaloadeR::insta_login(save = T)
+
+instaloadeR::insta_login(load = T)
+
 
 if(!file.exists("latest_hashtag.txt")){
   cat("stopptdenwahnsinn", file = "latest_hashtag.txt", append = T, sep = "\n")

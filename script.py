@@ -220,4 +220,4 @@ def get_followers(username):
   return(follower_list)
 
 
-insta_posts_py(query = "plannedemic", scope = "hashtag", max_posts = 1000000,  scrape_comments = False, save_path = "data/example.csv")
+# insta_posts_py(query = "plannedemic", scope = "hashtag", max_posts = 10,  scrape_comments = False, save_path = "data/example.csv")

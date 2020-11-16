@@ -5,7 +5,7 @@
 
 
 library(reticulate)
-library(instaloadeR)
+# library(instaloadeR)
 
 reticulate::use_python(py_config()$python)
 
@@ -15,16 +15,19 @@ reticulate::use_python(py_config()$python)
 # reticulate::source_python("https://raw.githubusercontent.com/favstats/instaloadeR/master/script.py")
 # message("instaloader initialized")
 # 
-# insta_posts <- function(query, scope, max_posts, scrape_comments, save_path = "", since = "", until = "") {
-#   
-#   py$insta_posts_py(query, scope, max_posts, scrape_comments, save_path, since, until) 
-# }
+insta_posts <- function(query, scope, max_posts, scrape_comments, save_path = "", since = "", until = "") {
 
-instaloadeR::init_instaloadeR()
+  py$insta_posts_py(query, scope, max_posts, scrape_comments, save_path, since, until)
+}
 
-instaloadeR::insta_login(save = T)
+# instaloadeR::init_instaloadeR()
+source_python("script.py")
 
-instaloadeR::insta_login(load = T)
+source("https://raw.githubusercontent.com/favstats/instaloadeR/master/R/login.R")
+
+insta_login(save = T)
+
+insta_login(load = T)
 
 
 if(!file.exists("latest_hashtag.txt")){
@@ -128,4 +131,4 @@ output <- tryCatch(
   }
 )
 
-print(paste0("Dataset has so many rows: ", nrow(output)))
+print(paste0("Dataset has so many rows: ", length(output)))

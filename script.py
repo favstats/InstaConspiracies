@@ -225,4 +225,4 @@ def get_followers(username):
 insta_login_py(os.getenv('INSTAGRAM_LOGIN'), os.getenv('INSTAGRAM_PW'))
 
 
-insta_posts_py(query = "plannedemic", scope = "hashtag", max_posts = 10,  scrape_comments = False, save_path = "data/example.csv")
+insta_posts_py(query = "covid", scope = "hashtag", max_posts = 10,  scrape_comments = False, save_path = "data/example.csv")

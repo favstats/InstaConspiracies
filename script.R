@@ -113,7 +113,7 @@ output <- tryCatch(
 
     with_timeout(insta_posts(query = hashies,
                              scope = "hashtag",
-                             max_posts = 1000000,
+                             max_posts = 10,
                              scrape_comments = F,
                              save_path = paste0("data/", hashies, ".csv")),
                  60*60*5.5,
@@ -124,7 +124,8 @@ output <- tryCatch(
     message("Here's the original error message:")
     message(cond)
     # Choose a return value in case of error
-    return(NA)
+    return(data.frame(perc = NA))
   }
 )
 
+print(paste0("Dataset has so many rows: ", nrow(output)))

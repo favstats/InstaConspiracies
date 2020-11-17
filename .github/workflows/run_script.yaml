@@ -15,6 +15,9 @@ jobs:
       RETICULATE_AUTOCONFIGURE: 'FALSE'
     steps:
       - uses: actions/checkout@v1
+      - uses: r-lib/actions/setup-r@v1
+      - name: Run R script
+        run: Rscript script.R
       - name: Set up Python
         uses: actions/setup-python@v2
         with:

@@ -214,8 +214,9 @@ def insta_posts_py(query, scope, max_posts, scrape_comments, save_path = "", sin
 	
 hashie = open("latest_hashtag.txt", "r").read()
 
-print(hashie)
 
-insta_posts_py(hashie, scope = "hashtag", max_posts = 10, scrape_comments = False, save_path = "example.csv")
+path_to_be_saved = "data/" + hashie + ".csv"
+
+insta_posts_py(hashie, scope = "hashtag", max_posts = 100000, scrape_comments = False, save_path = path_to_be_saved)
 
 # print(what)

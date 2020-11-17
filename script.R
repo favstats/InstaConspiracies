@@ -1,35 +1,4 @@
 
-# c("donaldtrump",  "tyranny",  "usa", "pray","conspiracy", "widerstand", "lies", "fearmongering", 
-#   "love","health", "2020", "blm", "government",  "demonstration", "govenmentcorruption", "cdc","pandemie","masks",  "conspiracytheory", 
-#   "socialdistancing", "grundgesetz", "woke", "facts", "impfpflicht", "who","covidiots","berlin","deutschland", "rockafeller", "maga", "trump", "freiheit","coronamemes", "virus", "vaccine", "pandemic", "hoax", "propaganda", "repost","humanrights", "grundrechte", "freedom","coronavirus", "covid19", "covid_19", "covid","corona", "truth", "vaccines", "lockdown", "5g", "maskenpflicht", "trump2020",  "wakeup")
-
-
-library(reticulate)
-# library(instaloadeR)
-
-reticulate::use_python(py_config()$python)
-
-# py_install("instaloader", pip = T, envname = NULL)
-
-
-# reticulate::source_python("https://raw.githubusercontent.com/favstats/instaloadeR/master/script.py")
-# message("instaloader initialized")
-# 
-
-# source_python("scripter.py")
-
-# insta_posts <- function(query, scope, max_posts, scrape_comments, save_path = "", since = "", until = "") {
-# 
-#   py$insta_posts_py(query, scope, max_posts, scrape_comments, save_path, since, until)
-# }
-# 
-# # instaloadeR::init_instaloadeR()
-# 
-# source("https://raw.githubusercontent.com/favstats/instaloadeR/master/R/login.R")
-# 
-# insta_login(save = T)
-# 
-# insta_login(load = T)
 
 
 if(!file.exists("latest_hashtag.txt")){
@@ -113,21 +82,21 @@ cat(hashies, file = "latest_hashtag.txt")
 
 # get_em <- function(hashtag) {
   
-output <- tryCatch(
-  {
-
-    with_timeout(source_python("scripter.py"),
-                 60*60*5.5,
-                 60*60*5.5)
-
-  },
-  error=function(cond) {
-    message("Here's the original error message:")
-    message(cond)
-    # Choose a return value in case of error
-    return(data.frame(perc = NA))
-  }
-)
+# output <- tryCatch(
+#   {
+# 
+#     with_timeout(source_python("scripter.py"),
+#                  60*60*5.5,
+#                  60*60*5.5)
+# 
+#   },
+#   error=function(cond) {
+#     message("Here's the original error message:")
+#     message(cond)
+#     # Choose a return value in case of error
+#     return(data.frame(perc = NA))
+#   }
+# )
 
 # flatten1 <- function(x) {
 #   y <- list()

@@ -21,8 +21,7 @@ instagram = instaloader.Instaloader(
 	save_metadata=True
 )
 
-instagram.load_session_from_file(os.getenv('INSTAGRAM_LOGIN'))
-
+instagram.login(user = os.getenv('INSTAGRAM_LOGIN'), passwd = os.getenv('INSTAGRAM_PW'))
 
 def insta_login_py(user, passwd = "", save = False):
     if passwd == "":
@@ -216,6 +215,8 @@ def insta_posts_py(query, scope, max_posts, scrape_comments, save_path = "", sin
 	return results
 	
 hashie = open("latest_hashtag.txt", "r").read()
+
+print(hashie)
 
 what = insta_posts_py(hashie, scope = "hashtag", max_posts = 10, scrape_comments = False, save_path = "example.csv")
 

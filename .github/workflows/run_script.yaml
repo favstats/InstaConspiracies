@@ -1,7 +1,7 @@
 name: Run R script
 
-#on: 
-#  push:
+on: 
+  push:
   # schedule:
   # - cron: '0 */24 * * *'
 
@@ -23,7 +23,7 @@ jobs:
         run: python -m pip install --upgrade pip instaloader
       - name: Run Py script
         run: python script.py
-        env: # Or as an environment variable
+        env: 
           INSTAGRAM_PW: ${{ secrets.INSTAGRAM_PW }}
           INSTAGRAM_LOGIN: ${{ secrets.INSTAGRAM_LOGIN }}
       - name: Commit results

@@ -217,6 +217,6 @@ hashie = open("latest_hashtag.txt", "r").read()
 
 path_to_be_saved = "data/" + hashie + ".csv"
 
-insta_posts_py(hashie, scope = "hashtag", max_posts = 100, since = "2021-01-01", until = "2019-12-01", scrape_comments = False, save_path = path_to_be_saved)
+insta_posts_py(hashie, scope = "hashtag", max_posts = 50000, scrape_comments = False, save_path = path_to_be_saved)
 
 # print(what)

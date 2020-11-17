@@ -81,13 +81,6 @@ def insta_posts_py(query, scope, max_posts, scrape_comments, save_path = "", sin
 				 #chunk = instagram.get_hashtag_posts(query)
 				hashtag_obj = instaloader.Hashtag.from_name(instagram.context, query)
 				chunk = hashtag_obj.get_all_posts()
-			elif scope == "username":
-				query = query.replace("@", "")
-				profile = instaloader.Profile.from_username(instagram.context, query)
-				chunk = profile.get_top_posts()
-			else:
-				print("Invalid search scope for instagram scraper: %s" % repr(scope))
-				return []
 
 			# "chunk" is a generator so actually retrieve the posts next
 			posts_processed = 0
@@ -95,25 +88,17 @@ def insta_posts_py(query, scope, max_posts, scrape_comments, save_path = "", sin
 			  
 				chunk_size += 1
 				print("Retrieving posts ('%s', %i posts)" % (query, chunk_size))
-				if posts_processed >= max_posts:
-					break
 				try:
 					posts.append(chunk.__next__())
-					posts_processed += 1
-				except StopIteration:
-					break
 		except instaloader.InstaloaderException as e:
 			print("Error while retrieving posts for query '%s'" % query)
 
 	# go through posts, and retrieve comments
 	results = []
 	posts_processed = 0
-	comments_bit = " and comments" if scrape_comments==True else ""
 	
 	if since != "" and until != "":
 		posts = takewhile(lambda p: p.date > until, dropwhile(lambda p: p.date > since, posts))
-
-
 
 	for post in posts:
 		results_posts = []
@@ -150,65 +135,6 @@ def insta_posts_py(query, scope, max_posts, scrape_comments, save_path = "", sin
 				save_csv(save_path, results_posts)
 			results.append(results_posts)
 			continue
-
-		try:
-			for comment in post.get_comments():
-				answers = [answer for answer in comment.answers]
-
-				try:
-					results_posts.append({
-						"id": str(comment.id),
-						"thread_id": str(thread_id),
-						"parent_id": str(thread_id),
-						"body": comment.text,
-						"author": comment.owner.username,
-						"timestamp": comment.created_at_utc.timestamp(),
-						"type": "comment",
-						"url": "",
-						"hashtags": ",".join(hashtag.findall(comment.text)),
-						"usertags": "",
-						"mentioned": ",".join(mention.findall(comment.text)),
-						"num_likes": comment.likes_count if hasattr(comment, "likes_count") else 0,
-						"num_comments": len(answers),
-						"level": "comment",
-						"query": query
-					})
-				except instaloader.QueryReturnedNotFoundException:
-					pass
-
-
-				# instagram only has one reply depth level at the time of
-				# writing, represented here
-				for answer in answers:
-					try:
-						results_posts.append({
-							"id": str(answer.id),
-							"thread_id": str(thread_id),
-							"parent_id": str(comment.id),
-							"body": answer.text,
-							"author": answer.owner.username,
-							"timestamp": answer.created_at_utc.timestamp(),
-							"type": "comment",
-							"url": "",
-							"hashtags": ",".join(hashtag.findall(answer.text)),
-							"usertags": "",
-							"mentioned": ",".join(mention.findall(answer.text)),
-							"num_likes": answer.likes_count if hasattr(answer, "likes_count") else 0,
-							"num_comments": 0,
-							"level": "answer",
-							"query": query
-						})
-					except instaloader.QueryReturnedNotFoundException:
-						pass
-
-		except (instaloader.QueryReturnedNotFoundException, instaloader.ConnectionException):
-			# data not available...? this happens sometimes, not clear why
-			pass
-
-		if save_path != "":
-			save_csv(save_path, results_posts)
-
-		results.append(results_posts)
                     
 	return results
 	

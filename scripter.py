@@ -80,7 +80,7 @@ def insta_posts_py(query, scope, max_posts, scrape_comments, save_path = "", sin
 				query = query.replace("#", "")
 				 #chunk = instagram.get_hashtag_posts(query)
 				hashtag_obj = instaloader.Hashtag.from_name(instagram.context, query)
-				chunk = hashtag_obj.get_all_posts()
+				chunk = hashtag_obj.get_posts()
 			elif scope == "username":
 				query = query.replace("@", "")
 				profile = instaloader.Profile.from_username(instagram.context, query)
@@ -217,6 +217,6 @@ hashie = open("latest_hashtag.txt", "r").read()
 
 path_to_be_saved = "data/" + hashie + ".csv"
 
-insta_posts_py(hashie, scope = "hashtag", max_posts = 100000, scrape_comments = False, save_path = path_to_be_saved)
+insta_posts_py(hashie, scope = "hashtag", max_posts = 100, since = "2021-01-01", until = "2019-12-01", scrape_comments = False, save_path = path_to_be_saved)
 
 # print(what)

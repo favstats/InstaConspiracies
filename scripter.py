@@ -75,24 +75,18 @@ def insta_posts_py(query, scope, max_posts, scrape_comments, save_path = "", sin
 	for query in queries:
 		chunk_size = 0
 		print("Retrieving posts ('%s')" % query)
-		try:
-			if scope == "hashtag":
-				query = query.replace("#", "")
-				 #chunk = instagram.get_hashtag_posts(query)
-				hashtag_obj = instaloader.Hashtag.from_name(instagram.context, query)
-				chunk = hashtag_obj.get_all_posts()
+		query = query.replace("#", "")
+		#chunk = instagram.get_hashtag_posts(query)
+		hashtag_obj = instaloader.Hashtag.from_name(instagram.context, query)
+		chunk = hashtag_obj.get_all_posts()
 
-			# "chunk" is a generator so actually retrieve the posts next
-			posts_processed = 0
-			for post in chunk:
-			  
-				chunk_size += 1
-				print("Retrieving posts ('%s', %i posts)" % (query, chunk_size))
-				try:
-					posts.append(chunk.__next__())
-		except instaloader.InstaloaderException as e:
-			print("Error while retrieving posts for query '%s'" % query)
-
+		# "chunk" is a generator so actually retrieve the posts next
+		posts_processed = 0
+		for post in chunk:
+			chunk_size += 1
+			print("Retrieving posts ('%s', %i posts)" % (query, chunk_size))
+			posts.append(chunk.__next__())
+				
 	# go through posts, and retrieve comments
 	results = []
 	posts_processed = 0
@@ -104,7 +98,7 @@ def insta_posts_py(query, scope, max_posts, scrape_comments, save_path = "", sin
 		results_posts = []
         
 		posts_processed += 1
-		print("Retrieving metadata%s for post %i" % (comments_bit, posts_processed))
+		# print("Retrieving metadata%s for post %i" % (comments_bit, posts_processed))
 
 		thread_id = post.shortcode
 

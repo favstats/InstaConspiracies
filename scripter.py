@@ -9,6 +9,7 @@ import csv
 
 
 
+
 instagram = instaloader.Instaloader(
 	quiet=False,
 	download_pictures=False,
@@ -19,6 +20,9 @@ instagram = instaloader.Instaloader(
 	compress_json=False,
 	save_metadata=True
 )
+
+instagram.load_session_from_file(os.getenv('INSTAGRAM_LOGIN'))
+
 
 def insta_login_py(user, passwd = "", save = False):
     if passwd == "":
@@ -210,40 +214,9 @@ def insta_posts_py(query, scope, max_posts, scrape_comments, save_path = "", sin
 		results.append(results_posts)
                     
 	return results
+	
+hashie = open("latest_hashtag.txt", "r").read()
 
+what = insta_posts_py(hashie, scope = "hashtag", max_posts = 10, scrape_comments = False, save_path = "example.csv")
 
-def get_followers(username):
-  
-  profile = instaloader.Profile.from_username(instagram.context, username)
-  
-  follower_list = []
-  for follower in profile.get_followers():
-    # print(follower.username)
-    follower_list.append(follower.username)
-    
-  return(follower_list)
-  
-# 
-# instagram.login(user = os.getenv('INSTAGRAM_LOGIN'), passwd = os.getenv('INSTAGRAM_PW'))
-# 
-# instagram.load_session_from_file(os.getenv('INSTAGRAM_LOGIN'))
-#   
-# hashtag = instaloader.Hashtag.from_name(instagram.context, "stop5gworldwide")
-# 
-# for post in hashtag.get_all_posts():
-#    L.download_post(post, target="#"+hashtag.name)
-# 
-# L = instaloader.Instaloader()
-# 
-# 
-# hashtag = instaloader.Hashtag.from_name(L.context, "stop5gworldwide")
-# 
-# for post in hashtag.get_top_posts():
-#    instagram.download_post(post, target="#"+hashtag.name)
-
-# L = Instaloader()
-# hashtag = Hashtag.from_name(L.context, HASHTAG)
-# 
-# 
-# get_hashtag_posts
-# insta_posts_py(query = "covid", scope = "hashtag", max_posts = 10,  scrape_comments = False, save_path = "data/example.csv")
+# print(what)

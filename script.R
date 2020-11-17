@@ -15,19 +15,21 @@ reticulate::use_python(py_config()$python)
 # reticulate::source_python("https://raw.githubusercontent.com/favstats/instaloadeR/master/script.py")
 # message("instaloader initialized")
 # 
-insta_posts <- function(query, scope, max_posts, scrape_comments, save_path = "", since = "", until = "") {
 
-  py$insta_posts_py(query, scope, max_posts, scrape_comments, save_path, since, until)
-}
+# source_python("scripter.py")
 
-# instaloadeR::init_instaloadeR()
-source_python("script.py")
-
-source("https://raw.githubusercontent.com/favstats/instaloadeR/master/R/login.R")
-
-insta_login(save = T)
-
-insta_login(load = T)
+# insta_posts <- function(query, scope, max_posts, scrape_comments, save_path = "", since = "", until = "") {
+# 
+#   py$insta_posts_py(query, scope, max_posts, scrape_comments, save_path, since, until)
+# }
+# 
+# # instaloadeR::init_instaloadeR()
+# 
+# source("https://raw.githubusercontent.com/favstats/instaloadeR/master/R/login.R")
+# 
+# insta_login(save = T)
+# 
+# insta_login(load = T)
 
 
 if(!file.exists("latest_hashtag.txt")){
@@ -114,11 +116,7 @@ cat(hashies, file = "latest_hashtag.txt")
 output <- tryCatch(
   {
 
-    with_timeout(insta_posts(query = hashies,
-                             scope = "hashtag",
-                             max_posts = 10,
-                             scrape_comments = F,
-                             save_path = paste0("data/", hashies, ".csv")),
+    with_timeout(source_python("scripter.py"),
                  60*60*5.5,
                  60*60*5.5)
 
@@ -131,19 +129,19 @@ output <- tryCatch(
   }
 )
 
-flatten1 <- function(x) {
-  y <- list()
-  rapply(x, function(x) y <<- c(y,x))
-  y
-}
+# flatten1 <- function(x) {
+#   y <- list()
+#   rapply(x, function(x) y <<- c(y,x))
+#   y
+# }
+# 
+# Reduce(output)
+# 
+# rbind(flatten1(output))
+# 
+# f <- function(l) {
+#   if (!is.list(l)) return(l)
+#   do.call('rbind', lapply(l, function(x) `length<-`(x, max(lengths(l)))))
+# }
 
-Reduce(output)
-
-rbind(flatten1(output))
-
-f <- function(l) {
-  if (!is.list(l)) return(l)
-  do.call('rbind', lapply(l, function(x) `length<-`(x, max(lengths(l)))))
-}
-
-print(paste0("Dataset has so many rows: ", length(output)))
+# print(paste0("Dataset has so many rows: ", length(output)))

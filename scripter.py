@@ -84,7 +84,7 @@ def insta_posts_py(query, scope, max_posts, scrape_comments, save_path = "", sin
 			elif scope == "username":
 				query = query.replace("@", "")
 				profile = instaloader.Profile.from_username(instagram.context, query)
-				chunk = profile.get_posts()
+				chunk = profile.get_top_posts()
 			else:
 				print("Invalid search scope for instagram scraper: %s" % repr(scope))
 				return []
@@ -213,10 +213,10 @@ def insta_posts_py(query, scope, max_posts, scrape_comments, save_path = "", sin
 	return results
 	
 hashie = open("latest_hashtag.txt", "r").read()
-
+# hashie = "hello"
 
 path_to_be_saved = "data/" + hashie + ".csv"
 
-insta_posts_py(hashie, scope = "hashtag", max_posts = 50000, scrape_comments = False, save_path = path_to_be_saved)
+insta_posts_py(hashie, scope = "hashtag", max_posts = 100, scrape_comments = False, save_path = path_to_be_saved)
 
 # print(what)

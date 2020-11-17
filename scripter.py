@@ -23,13 +23,11 @@ instagram = instaloader.Instaloader(
 
 instagram.login(user = os.getenv('INSTAGRAM_LOGIN'), passwd = os.getenv('INSTAGRAM_PW'))
 
-def insta_login_py(user, passwd = "", save = False):
-    if passwd == "":
-      instagram.load_session_from_file(user)
-    if user != "" and passwd != "":
-      instagram.login(user = user, passwd = passwd)
-    if save:
-      instagram.save_session_to_file()
+instagram.save_session_to_file()
+
+instagram.load_session_from_file(os.getenv('INSTAGRAM_LOGIN'))
+
+
 
 def save_csv(save_path, results_posts):
 	if not path.exists(save_path):
@@ -218,6 +216,6 @@ hashie = open("latest_hashtag.txt", "r").read()
 
 print(hashie)
 
-what = insta_posts_py(hashie, scope = "hashtag", max_posts = 10, scrape_comments = False, save_path = "example.csv")
+insta_posts_py(hashie, scope = "hashtag", max_posts = 10, scrape_comments = False, save_path = "example.csv")
 
 # print(what)

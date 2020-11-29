@@ -21,11 +21,11 @@ instagram = instaloader.Instaloader(
 	save_metadata=True
 )
 
-instagram.login(user = os.getenv('INSTAGRAM_LOGIN'), passwd = os.getenv('INSTAGRAM_PW'))
-
-instagram.save_session_to_file()
-
-instagram.load_session_from_file(os.getenv('INSTAGRAM_LOGIN'))
+# instagram.login(user = os.getenv('INSTAGRAM_LOGIN'), passwd = os.getenv('INSTAGRAM_PW'))
+# 
+# instagram.save_session_to_file()
+# 
+# instagram.load_session_from_file(os.getenv('INSTAGRAM_LOGIN'))
 
 
 
